@@ -1,86 +1,88 @@
 import java.util.Scanner;
 
 public class Principal {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n1, n2, op;
-        double a, b, c;
+        int op;
 
-        System.out.println("Bienvenido a la calculadora");
+        System.out.println("Bienvenido a la calculadora de fracciones");
         System.out.println("1. Suma");
         System.out.println("2. Resta");
         System.out.println("3. Multiplicación");
         System.out.println("4. División");
-        System.out.println("5. Ecuación Cuadrática");
         op = scanner.nextInt();
 
-        switch(op) {
+        switch (op) {
             case 1:
-                System.out.println("Ingrese el primer número:");
-                n1 = scanner.nextInt();
-                System.out.println("Ingrese el segundo número:");
-                n2 = scanner.nextInt();
-                int suma = n1 + n2;
-                System.out.println("La suma es: " + suma);
+                System.out.println("Ingrese el numerador del primer número:");
+                int n1 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del primer número:");
+                int d1 = scanner.nextInt();
+                Fraccion fraccion1 = new Fraccion(n1, d1);
+
+                System.out.println("Ingrese el numerador del segundo número:");
+                int n2 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del segundo número:");
+                int d2 = scanner.nextInt();
+                Fraccion fraccion2 = new Fraccion(n2, d2);
+
+                Fraccion suma = fraccion1.sumar(fraccion2);
+                System.out.println("La suma en fracción es: " + NotacionCientificaParser.convertirAFraccion(suma.toDouble()));
+                System.out.println("La suma en notación científica es: " + NotacionCientificaParser.convertirACientifico(suma.toDouble()));
                 break;
 
             case 2:
-                System.out.println("Ingrese el primer número:");
-                n1 = scanner.nextInt();
-                System.out.println("Ingrese el segundo número:");
-                n2 = scanner.nextInt();
-                int resta = n1 - n2;
-                System.out.println("La diferencia es: " + resta);
+                System.out.println("Ingrese el numerador del primer número:");
+                int n3 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del primer número:");
+                int d3 = scanner.nextInt();
+                Fraccion subFraccion1 = new Fraccion(n3, d3);
+
+                System.out.println("Ingrese el numerador del segundo número:");
+                int n4 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del segundo número:");
+                int d4 = scanner.nextInt();
+                Fraccion subFraccion2 = new Fraccion(n4, d4);
+
+                Fraccion diferencia = subFraccion1.restar(subFraccion2);
+                System.out.println("La diferencia en fracción es: " + NotacionCientificaParser.convertirAFraccion(diferencia.toDouble()));
+                System.out.println("La diferencia en notación científica es: " + NotacionCientificaParser.convertirACientifico(diferencia.toDouble()));
                 break;
 
             case 3:
-                System.out.println("Ingrese el primer número:");
-                n1 = scanner.nextInt();
-                System.out.println("Ingrese el segundo número:");
-                n2 = scanner.nextInt();
-                int multiplicacion = n1 * n2;
-                System.out.println("El producto es: " + multiplicacion);
+                System.out.println("Ingrese el numerador del primer número:");
+                int n5 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del primer número:");
+                int d5 = scanner.nextInt();
+                Fraccion mulFraccion1 = new Fraccion(n5, d5);
+
+                System.out.println("Ingrese el numerador del segundo número:");
+                int n6 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del segundo número:");
+                int d6 = scanner.nextInt();
+                Fraccion mulFraccion2 = new Fraccion(n6, d6);
+
+                Fraccion producto = mulFraccion1.multiplicar(mulFraccion2);
+                System.out.println("El producto en fracción es: " + NotacionCientificaParser.convertirAFraccion(producto.toDouble()));
+                System.out.println("El producto en notación científica es: " + NotacionCientificaParser.convertirACientifico(producto.toDouble()));
                 break;
 
             case 4:
-                System.out.println("Ingrese el primer número:");
-                n1 = scanner.nextInt();
-                System.out.println("Ingrese el segundo número:");
-                n2 = scanner.nextInt();
-                if (n2 != 0) {
-                    double division = (double) n1 / n2;
-                    System.out.println("El cociente es: " + division);
-                } else {
-                    System.out.println("No es posible dividir entre cero.");
-                }
-                break;
+                System.out.println("Ingrese el numerador del primer número:");
+                int n7 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del primer número:");
+                int d7 = scanner.nextInt();
+                Fraccion divFraccion1 = new Fraccion(n7, d7);
 
-            case 5:
-                System.out.println("Considerando la forma 'ax^2 + bx + c', defina:");
-                System.out.println("a = ");
-                a = scanner.nextDouble();
-                System.out.println("b = ");
-                b = scanner.nextDouble();
-                System.out.println("c = ");
-                c = scanner.nextDouble();
-                double discriminante = b * b - 4 * a * c;
-                if (discriminante > 0) {
-                    double raiz1 = (-b + Math.sqrt(discriminante)) / (2 * a);
-                    double raiz2 = (-b - Math.sqrt(discriminante)) / (2 * a);
-                    System.out.println("Las raíces son reales y diferentes:");
-                    System.out.println("Raíz 1 = " + raiz1);
-                    System.out.println("Raíz 2 = " + raiz2);
-                } else if (discriminante == 0) {
-                    double raiz = -b / (2 * a);
-                    System.out.println("La raíz es real y doble:");
-                    System.out.println("Raíz = " + raiz);
-                } else {
-                    System.out.println("Las raíces son complejas:");
-                    double parteReal = -b / (2 * a);
-                    double parteImaginaria = Math.sqrt(-discriminante) / (2 * a);
-                    System.out.println("Raíz 1 = " + parteReal + " + " + parteImaginaria + "i");
-                    System.out.println("Raíz 2 = " + parteReal + " - " + parteImaginaria + "i");
-                }
+                System.out.println("Ingrese el numerador del segundo número:");
+                int n8 = scanner.nextInt();
+                System.out.println("Ingrese el denominador del segundo número:");
+                int d8 = scanner.nextInt();
+                Fraccion divFraccion2 = new Fraccion(n8, d8);
+
+                Fraccion cociente = divFraccion1.dividir(divFraccion2);
+                System.out.println("El cociente en fracción es: " + NotacionCientificaParser.convertirAFraccion(cociente.toDouble()));
+                System.out.println("El cociente en notación científica es: " + NotacionCientificaParser.convertirACientifico(cociente.toDouble()));
                 break;
 
             default:
